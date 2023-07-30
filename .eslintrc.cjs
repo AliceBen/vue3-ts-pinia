@@ -2,7 +2,8 @@ module.exports = {
     // 运行环境
     "env": {
         "browser": true, // 浏览器端
-        "es2021": true
+        "es2021": true,
+        "node": true
     },
     // 继承规则
     "extends": [

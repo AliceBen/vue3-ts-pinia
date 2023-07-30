@@ -3,14 +3,20 @@ export interface loginFormData {
   password: string
 }
 
+interface dataType {
+  token?: string
+  message?: string
+}
+
 export interface ResponseData {
   code: number
   message: string
   ok: boolean
 }
 
-export interface loginResponseData extends ResponseData {
-  data: string
+export interface loginResponseData {
+  code: number
+  data: dataType
 }
 
 export interface userInfoReponseData extends ResponseData {
