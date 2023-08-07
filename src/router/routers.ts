@@ -8,7 +8,7 @@ export const constantsRouters = [
   {
     // 首页
     path: '/',
-    component: () => import('@/views/home/index.vue'),
+    component: () => import('@/views/layout/index.vue'),
     name: 'layout',
   },
   // 404
