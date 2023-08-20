@@ -30,8 +30,8 @@ export const constantsRouters = [
           hidden: false,
           icon: 'HomeFilled',
         },
-      }
-    ]
+      },
+    ],
   },
   // 404
   {

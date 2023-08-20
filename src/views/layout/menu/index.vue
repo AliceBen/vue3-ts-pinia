@@ -2,7 +2,11 @@
   <template v-for="(item, index) in menuList" :key="item.path">
     <!-- 没有子路由 -->
     <template v-if="!item.children">
-      <el-menu-item v-if="!item.meta.hidden" @click="goRoute" :index="item.path">
+      <el-menu-item
+        v-if="!item.meta.hidden"
+        @click="goRoute"
+        :index="item.path"
+      >
         <el-icon>
           <component :is="item.meta.icon"></component>
         </el-icon>
@@ -13,7 +17,11 @@
     </template>
     <!-- 有子路由但是只有一个子路由 -->
     <template v-if="item.children && item.children.length === 1">
-      <el-menu-item @click="goRoute" v-if="!item.children[0].meta.hidden" :index="item.children[0].path">
+      <el-menu-item
+        @click="goRoute"
+        v-if="!item.children[0].meta.hidden"
+        :index="item.children[0].path"
+      >
         <el-icon>
           <component :is="item.children[0].meta.icon"></component>
         </el-icon>
@@ -23,7 +31,10 @@
       </el-menu-item>
     </template>
     <!-- 有子路由且个数大于1 -->
-    <el-sub-menu v-if="item.children && item.children.length > 1" :index="item.path">
+    <el-sub-menu
+      v-if="item.children && item.children.length > 1"
+      :index="item.path"
+    >
       <template #title>
         <el-icon>
           <component :is="item.meta.icon"></component>
@@ -36,21 +47,21 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 //获取父组件传递过来的全部路由数组
-defineProps(['menuList']);
+defineProps(['menuList'])
 
 //获取路由器对象
-let $router = useRouter();
+let $router = useRouter()
 //点击菜单的回调
 const goRoute = (vc: any) => {
-    //路由跳转
-    $router.push(vc.index);
+  //路由跳转
+  $router.push(vc.index)
 }
 </script>
 <script lang="ts">
 export default {
-    name: 'Menu'
+  name: 'Menu',
 }
 </script>
 

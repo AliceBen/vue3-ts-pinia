@@ -2,10 +2,6 @@
   <div>skuform</div>
 </template>
 
-<script lang="ts">
+<script lang="ts"></script>
 
-</script>
-
-<style>
-
-</style>
+<style></style>

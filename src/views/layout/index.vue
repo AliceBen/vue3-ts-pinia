@@ -2,25 +2,28 @@
   <div class="layout-wrap">
     <div class="layout-left">
       <Logo></Logo>
-       <el-scrollbar class="scrollbar">
-          <el-menu 
-            background-color="#111441" 
-            text-color="#61657e" 
-            active-text-color="#fff"
-            :default-active="$route.path"
-            :collapse="LayOutSettingStore.fold ? true : false"
-          >
-            <Menu :menuList="userStore.menuRouters"></Menu>
-          </el-menu>
-        </el-scrollbar>
+      <el-scrollbar class="scrollbar">
+        <el-menu
+          background-color="#111441"
+          text-color="#61657e"
+          active-text-color="#fff"
+          :default-active="$route.path"
+          :collapse="LayOutSettingStore.fold ? true : false"
+        >
+          <Menu :menuList="userStore.menuRouters"></Menu>
+        </el-menu>
+      </el-scrollbar>
     </div>
-    <div class="layout-right" :class="{fold: LayOutSettingStore.fold ? true : false}">
+    <div
+      class="layout-right"
+      :class="{ fold: LayOutSettingStore.fold ? true : false }"
+    >
       <div class="layout-nav">
         <Tabbar></Tabbar>
       </div>
       <div class="layout-content">
         <div class="content">
-         <Main></Main>
+          <Main></Main>
         </div>
       </div>
     </div>
@@ -59,7 +62,6 @@ let LayOutSettingStore = useLayOutSettingStore()
         border-right: none;
       }
     }
-    
   }
   .layout-right {
     position: fixed;
@@ -69,7 +71,7 @@ let LayOutSettingStore = useLayOutSettingStore()
     top: 0px;
     left: $layout-left-width;
     &.fold {
-      width: calc(100vw - $base-menu-min-width );
+      width: calc(100vw - $base-menu-min-width);
       left: $base-menu-min-width;
     }
   }

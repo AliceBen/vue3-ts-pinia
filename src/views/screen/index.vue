@@ -2,6 +2,4 @@
   <div>screen</div>
 </template>
 
-<script lang="ts">
-
-</script>
+<script lang="ts"></script>
