@@ -48,4 +48,19 @@ export default [
       return { code: 200, data: { token } }
     },
   },
+  // 获取用户信息
+  {
+    url: '/api/user/info',
+    method: 'get',
+    response: (request) => {
+      // 获取请求头携带token
+      const token = request.headers.token
+      // 查看用户是否包含有本次token用户
+      const checkUser = createUserList().find(item => item.token === token)
+      if (!checkUser) {
+        return { code: 201, data: {message: '获取用户信息失败'}}
+      }
+      return {code: 200, data: {checkUser}}
+    }
+  }
 ]

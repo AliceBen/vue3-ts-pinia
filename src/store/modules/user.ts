@@ -1,7 +1,7 @@
 // import { constantsRouters } from '@/router/routers'
 import { defineStore } from 'pinia'
 // 引入接口
-import { reqLogin } from '@/api/user/index'
+import { reqLogin, reqUserInfo } from '@/api/user/index'
 // 引入数据类型
 import type { loginFormData, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
@@ -13,10 +13,10 @@ const useUserStore = defineStore('User', {
     return {
       token: GET_TOKEN(),
       menuRouters: constantsRouters, // 仓库存储生成菜单需要数组(路由)
-      // username: '',
-      // avatar: '',
-      // // 存储当前用户是否包含某一个按钮
-      // buttons: []
+      username: '',
+      avatar: '',
+      // 存储当前用户是否包含某一个按钮
+      buttons: []
     }
   },
   actions: {
@@ -35,6 +35,15 @@ const useUserStore = defineStore('User', {
         return Promise.reject(new Error(result.data.message))
       }
     },
+    // 获取用户信息
+    async userInfo () {
+      const result = await reqUserInfo()
+      console.log('result', result)
+      if (result.code === 200) {
+        this.username = result.data.checkUser.username
+        this.avatar = result.data.checkUser.avatar
+      }
+    }
   },
   getters: {},
 })

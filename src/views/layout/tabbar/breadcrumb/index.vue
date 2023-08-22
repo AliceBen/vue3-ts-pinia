@@ -13,7 +13,7 @@
       :to="item.path"
     >
       <!-- 图标 -->
-      <el-icon>
+      <el-icon class="icon">
         <component :is="item.meta.icon"></component>
       </el-icon>
       <!-- 面包屑展示匹配路由的标题 -->
@@ -41,4 +41,10 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.icon {
+  position: relative;
+  top: 2px;
+  right: 5px;
+}
+</style>
