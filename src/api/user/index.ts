@@ -8,9 +8,13 @@ import type {
 enum API {
   LOGIN_URL = '/user/login',
   USERINFO_URL = '/user/info',
+  LOGOUT_URL = '/user/loginOut',
 }
 
 export const reqLogin = (data: loginFormData) =>
   request.post<any, loginResponseData>(API.LOGIN_URL, data)
+
 export const reqUserInfo = () =>
   request.get<any, userInfoReponseData>(API.USERINFO_URL)
+
+export const reqLogout = () => request.post<any, any>(API.LOGOUT_URL)

@@ -25,9 +25,13 @@
 <script lang="ts" setup>
 import useLayOutSettingStore from '@/store/modules/setting'
 import useUserStore from '@/store/modules/user'
+import { useRoute, useRouter } from 'vue-router'
 let layoutSettingStore = useLayOutSettingStore()
 
 let userStore = useUserStore()
+// 获取路由器对象
+let $router = useRouter()
+let $route = useRoute()
 
 //刷新按钮点击回调
 const updateRefsh = () => {
@@ -43,6 +47,16 @@ const fullScreen = () => {
   } else {
     document.exitFullscreen()
   }
+}
+
+// 退出登录
+const logout = async () => {
+  //第一件事情:需要向服务器发请求[退出登录接口]******
+  //第二件事情:仓库当中关于用于相关的数据清空[token|username|avatar]
+  //第三件事情:跳转到登录页面
+  await userStore.userLogout()
+  //跳转到登录页面
+  $router.push({path: '/login', query: {redirect: $route.path}})
 }
 </script>
 

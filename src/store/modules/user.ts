@@ -1,11 +1,11 @@
 // import { constantsRouters } from '@/router/routers'
 import { defineStore } from 'pinia'
 // 引入接口
-import { reqLogin, reqUserInfo } from '@/api/user/index'
+import { reqLogin, reqUserInfo, reqLogout } from '@/api/user/index'
 // 引入数据类型
 import type { loginFormData, loginResponseData } from '@/api/user/type'
 import type { UserState } from './types/type'
-import { SET_TOKEN, GET_TOKEN } from '@/utils/token'
+import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { constantsRouters } from '@/router/routers'
 // 创建用户小仓库
 const useUserStore = defineStore('User', {
@@ -16,7 +16,7 @@ const useUserStore = defineStore('User', {
       username: '',
       avatar: '',
       // 存储当前用户是否包含某一个按钮
-      buttons: []
+      buttons: [],
     }
   },
   actions: {
@@ -36,13 +36,33 @@ const useUserStore = defineStore('User', {
       }
     },
     // 获取用户信息
-    async userInfo () {
+    async userInfo() {
       const result = await reqUserInfo()
       console.log('result', result)
       if (result.code === 200) {
         this.username = result.data.checkUser.username
         this.avatar = result.data.checkUser.avatar
       }
+    },
+    // 退出登录
+    async userLogout() {
+      //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
+      this.token = ''
+      this.username = ''
+      this.avatar = ''
+      REMOVE_TOKEN()
+      // 退出登录请求
+      // const result: any = await reqLogout()
+      // if (result.code === 200) {
+      //   //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
+      //   this.token = ''
+      //   this.username = ''
+      //   this.avatar = ''
+      //   REMOVE_TOKEN()
+      //   return 'ok'
+      // } else {
+      //   return Promise.reject(new Error(result.message))
+      // }
     }
   },
   getters: {},
