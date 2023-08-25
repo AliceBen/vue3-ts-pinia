@@ -20,19 +20,20 @@ const useUserStore = defineStore('User', {
     }
   },
   actions: {
+    // atguigu123
     async userLogin(data: loginFormData) {
       const result: loginResponseData = await reqLogin(data)
       console.log(result)
       if (result.code === 200) {
         // 由于pinia存储数据其实利用的是js对象
-        this.token = result.data.token as string
+        this.token = result.data as string
         // 本地存储持久化存储一份
         // localStorage.setItem('TOKEN', (result.data.token as string))
-        SET_TOKEN(result.data.token as string)
+        SET_TOKEN(result.data as string)
         // 保证当前sync函数返回一个成功的promise
         return 'ok'
       } else {
-        return Promise.reject(new Error(result.data.message))
+        return Promise.reject(new Error(result.data))
       }
     },
     // 获取用户信息
@@ -40,29 +41,26 @@ const useUserStore = defineStore('User', {
       const result = await reqUserInfo()
       console.log('result', result)
       if (result.code === 200) {
-        this.username = result.data.checkUser.username
-        this.avatar = result.data.checkUser.avatar
+        this.username = result.data.name
+        this.avatar = result.data.avatar
       }
     },
     // 退出登录
     async userLogout() {
       //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
-      this.token = ''
-      this.username = ''
-      this.avatar = ''
       REMOVE_TOKEN()
       // 退出登录请求
-      // const result: any = await reqLogout()
-      // if (result.code === 200) {
-      //   //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
-      //   this.token = ''
-      //   this.username = ''
-      //   this.avatar = ''
-      //   REMOVE_TOKEN()
-      //   return 'ok'
-      // } else {
-      //   return Promise.reject(new Error(result.message))
-      // }
+      const result: any = await reqLogout()
+      if (result.code === 200) {
+        //目前没有mock接口:退出登录接口(通知服务器本地用户唯一标识失效)
+        this.token = ''
+        this.username = ''
+        this.avatar = ''
+        REMOVE_TOKEN()
+        return 'ok'
+      } else {
+        return Promise.reject(new Error(result.message))
+      }
     }
   },
   getters: {},
